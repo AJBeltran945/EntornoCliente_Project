@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BuscaCiertos</title>
+    <script src="code.js"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<header>
+    <h1>BuscaCiertos</h1>
+</header>
+<body>
+    <div class="search">
+        <div class="filtros">
+            <h1>Filtros de Conciertos</h1>
+            <div class="filtroNombre">
+                <div class="nombreConcierto">
+                    <label for="nombreConcierto">Nombre del Concierto:</label>
+                    <input type="text" id="nombreConcierto">
+                </div>
+                <div class="nombreArtista">
+                    <label for="nombreArtista">Nombre del Artista:</label>
+                    <input type="text" id="nombreArtista">
+                </div>
+            </div>
+
+            <div class="filtroFecha">
+                <div class="fechaInicio">
+                    <label for="fechaInicio">Fecha de Inicio:</label>
+                    <input type="date" id="fechaInicio">
+                </div>
+                <div class="fechaFin">
+                    <label for="fechaFin">Fecha de Fin:</label>
+                    <input type="date" id="fechaFin">
+                </div>
+
+                <button onclick="filtrarConciertos()">Filtrar Conciertos</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="result">
+        <h1>Resultados de la Búsqueda: </h1>
+        <div class="conciertos">
+            <div class="concierto">
+                <h2>Enchanted Evenings</h2>
+                <p class="description"></p>
+                <p>Artista: Taylor Swift</p>
+                <p>Fecha: June 15, 2025</p>
+                <p class="temporada"></p>
+                <p>Precio por entrada: 200€</p>
+
+                <div class="residency-check">
+                    <label for="Residente">¿Eres residente?</label>
+                    <input type="checkbox" name="Residente" id="Residente">
+                </div>
+
+                <div class="ticket-quantity">
+                    <label for="cantidad">¿Cuántos tickets quieres?</label>
+                    <input type="number" name="cantidad" id="cantidad" min="1" placeholder="1">
+                </div>
+
+                <button class="purchase-btn">Comprar Entrada</button>
+
+                <p class="diasQueQuedan"></p>
+
+                <button class="reminder-btn">Recordatorio</button>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>
