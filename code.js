@@ -1,4 +1,4 @@
-const concerts = [
+const concerts = [ //array de conciertos
     {
         artist: "Taylor Swift",
         name: "Enchanted Evenings",
@@ -83,27 +83,34 @@ const concerts = [
 
 // ---------------- MAIN CODE ---------------- //
 
-function filtrarConciertos() {
+// Evento para filtrar los conciertos
+function filtrarConciertos() { //funcion para filtrar los conciertos
+
     const nombre = document.getElementById("nombreConcierto").value;
     const artista = document.getElementById("nombreArtista").value;
     const fechaInicio = document.getElementById("fechaInicio").value;
     const fechaFin = document.getElementById("fechaFin").value;
 
-    concerts.forEach(concert => concert.show = false);
+    concerts.forEach(concert => concert.show = false); //iteramos el array de conciertos y asignamos false a la propiedad show
 
-    if (nombre) {
+    if (nombre) { //si el nombre no esta vacio
         filtrarPorNombre(nombre);
     }
-    if (artista) {
+    if (artista) { //si el artista no esta vacio
         filtrarPorArtista(artista);
     }
-    if (fechaInicio && fechaFin) {
+    if (fechaInicio && fechaFin) { //si las fechas no estan vacias
         filterConcertsByDate(fechaInicio, fechaFin);
     }
+    if (!nombre && !artista && !fechaInicio && !fechaFin) { //si no hay nada en los campos
+        concerts.forEach(concert => concert.show = true);
+    }
 
-    for (let i = 0; i < concerts.length; i++) {
+    for (let i = 0; i < concerts.length; i++) { //iteramos el array de conciertos para mostrar los conciertos que cumplen con las condiciones
+
         const concierto = document.getElementById("concierto" + (i + 1));
         const header = document.getElementById("header" + (i + 1));
+
         if (concierto && header) {
             concierto.style.display = concerts[i].show ? "flex" : "none";
             header.style.display = concerts[i].show ? "flex" : "none";
@@ -111,12 +118,49 @@ function filtrarConciertos() {
     }
 }
 
-document.getElementById("nombreConcierto").addEventListener("input", filtrarConciertos);
-document.getElementById("nombreArtista").addEventListener("input", filtrarConciertos);
-document.getElementById("fechaInicio").addEventListener("change", filtrarConciertos);
-document.getElementById("fechaFin").addEventListener("change", filtrarConciertos);
+document.addEventListener("click", function (event) {
+
+    if (event.target.tagName === "BUTTON") {
+
+        for (let i = 0; i < concerts.length; i++) {
+
+            if (event.target.id === "reminder" + (i + 1)) {
+
+                let fechaConcierto = new Date(concerts[i].date);
+                calcularDiasAntelacion(fechaConcierto, i);
+            }
+        }
+    }
+});
 
 
+// Evento para calcular los días de anticipación
+document.addEventListener("click", function(event) { //evento click
+
+    if (event.target.tagName === "BUTTON") { //si el evento es un boton
+
+        for (let i = 0; i < concerts.length; i++) { //iteramos el array de conciertos
+
+            if (event.target.id === "purchase" + (i + 1)) { //si el boton es comprar
+
+                let cantidad = parseInt(document.getElementById("cantidad" + (i + 1)).value);
+                const checkbox = document.getElementById("Residente" + (i + 1));
+                let precio = concerts[i].minimumTicketPrice;
+                console.log(precio, cantidad, checkbox.checked);
+
+                let total = calcularPrecioDescuento(precio, cantidad, checkbox.checked);
+
+
+                const totalHTML = document.getElementById("total" + (i + 1));
+
+                totalHTML.innerText = `Total: $${total}`;
+
+                break;
+            }
+        }
+
+    }
+});
 
 // ---------------- FUNCTIONS ---------------- //
 
@@ -158,9 +202,7 @@ function filterConcertsByDate(startDate, endDate) {
 }
 
 
-function calcularDiasAntelacion() {
-    // Fecha del concierto
-    let fechaConcierto = new Date(document.getElementById("fechaConcierto").value);
+function calcularDiasAntelacion(fechaConcierto, i) {
     // Días de de hoy
     let diasDeHoy = new Date();
 
@@ -169,8 +211,8 @@ function calcularDiasAntelacion() {
     let diasHastaConcierto = Math.ceil(diferenciaMs / (1000 * 60 * 60 * 24));
 
 
-    document.getElementById("resultado").textContent =
-        diasHastaConcierto >= 0  ? "Quedan " + diasHastaConcierto + " días hasta el concierto." : "El concierto ya ha pasado.";
+    document.getElementById("diasQueQuedan" +(i +1)).textContent =
+        diasHastaConcierto >= 0  ? "Quedan " + diasHastaConcierto + " días." : "El concierto ya ha pasado.";
 }
 
 
@@ -178,34 +220,27 @@ function  determinarTemporada() {
 
 }
 
-function calcularPrecioDescuento(){
-    let precioBase = parseFloat(document.getElementById("precio").innerText);
-    let cantidad = parseInt(document.getElementById("CantidadEntradas").value);
-    let checkbox = document.getElementById('Residente');
+function calcularPrecioDescuento(precioBase, cantidad, checkBox) {
     let total;
 
+    console.log(total, precioBase, cantidad, checkBox);
 
     // Comprobar si el checkbox está marcado
-    if (checkbox.checked) {
+    if (checkBox) { // Use the boolean value directly
         let descuento = 0.5;
         total = (precioBase - (precioBase * descuento)) * cantidad;
     } else {
         total = precioBase * cantidad;
+        console.log(total)
     }
-
 
     // Redondear el total a dos decimales usando Math
     total = Math.round(total * 100) / 100;
+    console.log(total)
 
-
-    // Mostrar el resultado
-    alert("Total: " + total.toFixed(2) + " €");
-    console.log("Total:", total.toFixed(2));
+    return total;
 }
 
-function calcularIngresosEsperados(){
-
-}
 
 function  validarTicketsDisponibles(ticketsIngresados, maxTickets){
 
