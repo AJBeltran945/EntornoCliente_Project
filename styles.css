@@ -209,11 +209,11 @@ input[type="checkbox"] {
 }
 
 .purchase-btn {
-    background-color: #007bff;
+    background-color: #9B7EBD;
 }
 
 .purchase-btn:hover {
-    background-color: #0056b3;
+    background-color: #D4BEE4;
 }
 
 .recordatorio{
@@ -234,11 +234,11 @@ input[type="checkbox"] {
 }
 
 .reminder-btn {
-    background-color: #ffc107;
+    background-color: #9B7EBD;
 }
 
 .reminder-btn:hover {
-    background-color: #e0a800;
+    background-color: #D4BEE4;
 }
 /* /data concierto */
 /* /concierto */
