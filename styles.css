@@ -25,9 +25,10 @@ body {
     background-color: #EEEEEE;
     margin: 0;
 }
+/* /Body */
 
-/*search*/
 
+/* filtros */
 .search {
     display: flex;
     justify-content: center;
@@ -80,8 +81,9 @@ input[type="text"]{
     background-color: #f9fafb;
     color: #374151;
 }
+/* /filter nombre */
 
-/* filter fecha */
+/* filtros fecha*/
 .filtroFecha{
     display: flex;
     justify-content: center;
@@ -122,22 +124,16 @@ input[type="date"] {
 .filtroFecha button:hover {
     background-color: #9B7EBD;
 }
+/* /filtros fecha*/
+/* /filtros */
 
-/* results */
 
+/* Conciertos */
 .result{
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-}
-
-.conciertos{
-    width: 75%;
-    padding: 30px;
-    margin-bottom: 20px;
-    margin-top: 20px;
-    border-radius: 8px;
 }
 
 .conciertos h2{
@@ -150,30 +146,36 @@ input[type="date"] {
     margin-bottom: 10px;
 }
 
-.conciertos {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
+.conciertos{
+    width: 75%;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    border-radius: 8px;
 }
 
+/* concierto */
 .concierto {
     padding: 20px;
     width: 100%;
     font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: space-around;
 }
-
 .concierto p {
     color: #555;
+    margin-top: 8px;
     margin-bottom: 8px;
 }
-
-.concierto p.temporada,
-.concierto p.description {
-    color: #777;
-    font-size: 0.9em;
+.conciertos img{
+    width: 400px;
+    height: 400px;
 }
-
+/* data concierto */
+.dataConcierto{
+    display: flex;
+    flex-direction: column;
+    max-width: 440px;
+}
 .residency-check,
 .ticket-quantity {
     display: flex;
@@ -195,9 +197,7 @@ input[type="checkbox"] {
     border: 1px solid #ccc;
     border-radius: 4px;
 }
-
-.purchase-btn,
-.reminder-btn {
+.purchase-btn {
     width: 100%;
     padding: 10px;
     margin-top: 10px;
@@ -216,6 +216,23 @@ input[type="checkbox"] {
     background-color: #0056b3;
 }
 
+.recordatorio{
+    display: flex;
+    align-content: center;
+    align-items: center;
+    justify-content: space-around;
+}
+.reminder-btn {
+    width: 50%;
+    padding: 10px;
+    margin-top: 10px;
+    font-size: 1em;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
 .reminder-btn {
     background-color: #ffc107;
 }
@@ -223,10 +240,6 @@ input[type="checkbox"] {
 .reminder-btn:hover {
     background-color: #e0a800;
 }
-
-
-
-
-
-
-
+/* data concierto */
+/* /concierto */
+/* /Conciertos */
