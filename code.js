@@ -3,7 +3,7 @@ const concerts = [ //array de conciertos
         artist: "Taylor Swift",
         name: "Enchanted Evenings",
         description: "Una noche mágica llena de los mayores éxitos de Taylor Swift.",
-        date: "06/15/2025",
+        date: "2025/06/15",
         minimumTicketPrice: 200,
         show: false
     },
@@ -11,7 +11,7 @@ const concerts = [ //array de conciertos
         artist: "Drake",
         name: "Dreams and Destiny Tour",
         description: "Un viaje musical a través de las mejores rimas y melodías de Drake.",
-        date: "07/20/2025",
+        date: "2025/07/20",
         minimumTicketPrice: 180,
         show: false
     },
@@ -19,7 +19,7 @@ const concerts = [ //array de conciertos
         artist: "Billie Eilish",
         name: "Echoes of Silence",
         description: "Una experiencia íntima y única con la voz cautivadora de Billie Eilish.",
-        date: "08/05/2025",
+        date: "2025/08/20",
         minimumTicketPrice: 150,
         show: false
     },
@@ -27,7 +27,7 @@ const concerts = [ //array de conciertos
         artist: "Harry Styles",
         name: "Celestial Nights",
         description: "Un espectáculo deslumbrante que combina el pop moderno con la esencia del rock.",
-        date: "09/10/2025",
+        date: "2025/09/10",
         minimumTicketPrice: 180,
         show: false
     },
@@ -35,7 +35,7 @@ const concerts = [ //array de conciertos
         artist: "Beyoncé",
         name: "Golden Aura",
         description: "La reina del pop regresa para ofrecer un show lleno de energía y talento.",
-        date: "10/12/2025",
+        date: "2025/10/12",
         minimumTicketPrice: 250,
         show: false
     },
@@ -43,7 +43,7 @@ const concerts = [ //array de conciertos
         artist: "The Weeknd",
         name: "Twilight Mirage",
         description: "Un viaje sonoro a través de las noches más memorables con The Weeknd.",
-        date: "11/01/2025",
+        date: "2025/11/01",
         minimumTicketPrice: 175,
         show: false
     },
@@ -51,7 +51,7 @@ const concerts = [ //array de conciertos
         artist: "Ariana Grande",
         name: "Heaven’s Glow Tour",
         description: "Un concierto espectacular con la poderosa voz y presencia de Ariana Grande.",
-        date: "11/22/2025",
+        date: "2025/11/22",
         minimumTicketPrice: 170,
         show: false
     },
@@ -59,7 +59,7 @@ const concerts = [ //array de conciertos
         artist: "Dua Lipa",
         name: "Neon Horizons",
         description: "Una noche vibrante de pop y ritmos electrizantes con Dua Lipa.",
-        date: "12/06/2025",
+        date: "2025/12/06",
         minimumTicketPrice: 140,
         show: false
     },
@@ -67,7 +67,7 @@ const concerts = [ //array de conciertos
         artist: "Ed Sheeran",
         name: "Journey of Hearts",
         description: "Una travesía emocional a través de las melodías y letras de Ed Sheeran.",
-        date: "01/18/2025",
+        date: "2025/01/18",
         minimumTicketPrice: 120,
         show: false
     },
@@ -75,11 +75,12 @@ const concerts = [ //array de conciertos
         artist: "Kendrick Lamar",
         name: "Voices of the City",
         description: "Un potente mensaje social y musical en el escenario con Kendrick Lamar",
-        date: "02/14/2025",
+        date: "2025/02/14",
         minimumTicketPrice: 180,
         show: false
     }
 ];
+
 
 // ---------------- MAIN CODE ---------------- //
 
@@ -118,6 +119,7 @@ function filtrarConciertos() { //funcion para filtrar los conciertos
     }
 }
 
+// Evento para calcular los días de anticipación
 document.addEventListener("click", function (event) {
 
     if (event.target.tagName === "BUTTON") {
@@ -133,8 +135,20 @@ document.addEventListener("click", function (event) {
     }
 });
 
+// Evento para decir que temporada es
+document.addEventListener("DOMContentLoaded", function () {
 
-// Evento para calcular los días de anticipación
+    for (let i = 0; i < concerts.length; i++) {
+
+            let fechaConcierto = new Date(concerts[i].date);
+            tenerTemporada(fechaConcierto, i);
+
+    }
+
+});
+
+
+// Calcular el precio total
 document.addEventListener("click", function(event) { //evento click
 
     if (event.target.tagName === "BUTTON") { //si el evento es un boton
@@ -153,7 +167,7 @@ document.addEventListener("click", function(event) { //evento click
 
                 const totalHTML = document.getElementById("total" + (i + 1));
 
-                totalHTML.innerText = `Total: $${total}`;
+                totalHTML.innerText = `Total: ${total}€`;
 
                 break;
             }
@@ -215,9 +229,18 @@ function calcularDiasAntelacion(fechaConcierto, i) {
         diasHastaConcierto >= 0  ? "Quedan " + diasHastaConcierto + " días." : "El concierto ya ha pasado.";
 }
 
+function tenerTemporada(concertDate, i) {
+    const month = concertDate.getMonth() + 1;
 
-function  determinarTemporada() {
-
+    if ((month >= 3 && month <= 5)) {
+        document.getElementById("temporada" +(i +1)).textContent = "Temporada: Primavera";
+    } else if ((month >= 6 && month <= 8)) {
+        document.getElementById("temporada" +(i +1)).textContent = "Temporada: Verano";
+    } else if ((month >= 9 && month <= 11)) {
+        document.getElementById("temporada" +(i +1)).textContent = "Temporada: Otoño";
+    } else {
+        document.getElementById("temporada" +(i +1)).textContent = "Temporada: Invierno";
+    }
 }
 
 function calcularPrecioDescuento(precioBase, cantidad, checkBox) {
@@ -240,9 +263,3 @@ function calcularPrecioDescuento(precioBase, cantidad, checkBox) {
 
     return total;
 }
-
-
-function  validarTicketsDisponibles(ticketsIngresados, maxTickets){
-
-}
-
